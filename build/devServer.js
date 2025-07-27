@@ -9,6 +9,11 @@ var domain = matches && matches[1];
 // configuration for local dev server. This is used by webpack-dev-server
 // to proxy requests to the backend.
 const devServer = {
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    },
     proxy: {
         '/rest': {
             target: MAPSTORE_BACKEND_URL,

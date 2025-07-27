@@ -891,7 +891,7 @@
         "cfg": {
           "draggable": false,
           "advancedSettings": false,
-          "showAPI": false,
+          "showAPI": true,
           "embedOptions": {
             "showTOCToggle": false
           },
@@ -996,7 +996,7 @@
       {
         "name": "Share",
         "cfg": {
-          "showAPI": false,
+          "showAPI": true,
           "advancedSettings": false,
           "shareUrlRegex": "(h[^#]*)#\\/dashboard\\/([A-Za-z0-9]*)",
           "shareUrlReplaceString": "$1dashboard-embedded.html#/$2",
@@ -1181,7 +1181,7 @@
         "name": "Share",
         "cfg": {
           "embedPanel": true,
-          "showAPI": false,
+          "showAPI": true,
           "embedOptions": {
             "showTOCToggle": false,
             "allowFullScreen": false

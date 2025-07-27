@@ -1,4 +1,4 @@
-version: "3.8"
+# docker-compose.yml - VERSÃO CORRIGIDA E OTIMIZADA
 
 services:
   postgres:
@@ -19,46 +19,52 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432" # <-- Corrigido para mapeamento
+      - "5433:5432" # Exposto para podermos nos conectar com um cliente de DB se quisermos
     networks:
       - mapstore-network
 
   geoserver:
     image: kartoza/geoserver:2.21.2
-    container_name: geoserver # <-- Adicionado para consistência
-    restart: on-failure # <-- Adicionado para consistência
-    ports:
-      - "8282:8080"
+    container_name: geoserver
+    restart: on-failure
     volumes:
       - geoserver_data:/opt/geoserver/data_dir
     environment:
       - GEOSERVER_ADMIN_USER=admin
       - GEOSERVER_ADMIN_PASSWORD=geoserver
+    # Não precisa expor a porta 8282, o proxy vai cuidar disso
     networks:
       - mapstore-network
 
   mapstore:
     build:
       context: .
-      dockerfile: docker/mapstore/Dockerfile # <-- Corrigido para o caminho padrão
+      dockerfile: docker/mapstore/Dockerfile
     container_name: mapstore
-    restart: on-failure # <-- Adicionado para consistência
+    restart: on-failure
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - mapstore-network
-    # A porta interna 8080 do mapstore não precisa ser exposta aqui
-    # porque o proxy vai acessá-la pela rede interna.
+    # =======================================================================
+    # ===== CORREÇÃO #1: ADICIONANDO O VOLUME PARA O ARQUIVO DE CONFIGURAÇÃO =====
+    # =======================================================================
+    volumes:
+      - ./docker/mapstore.conf:/usr/local/tomcat/webapps/mapstore/WEB-INF/classes/local-config.properties
 
   proxy:
-    image: nginx:1.21-alpine # <-- Usando uma versão específica e leve
+    image: nginx:1.21-alpine
     container_name: proxy
     restart: on-failure
-    volumes:
-      - ./docker/proxy/conf.d:/etc/nginx/conf.d # <-- CORREÇÃO PRINCIPAL: Montando o diretório
+    # =======================================================================
+    # ===== CORREÇÃO #2: USANDO A PORTA 80 PADRÃO PARA EVITAR CONFLITOS ====
+    # =======================================================================
     ports:
-      - "8080:80" # <-- CORREÇÃO: Usando a porta 8080 do host
+      - "80:80" # O NGINX vai ouvir na porta 80 (padrão HTTP) do seu PC
+      - "8282:8081" # Expondo a porta do GeoServer através do proxy
+    volumes:
+      - ./docker/proxy/conf.d:/etc/nginx/conf.d
     depends_on:
       - mapstore
       - geoserver
