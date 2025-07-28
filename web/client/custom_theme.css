@@ -1,0 +1,49 @@
+/* Arquivo: web/client/custom_theme.css */
+
+/* --- BASE PARA O LAYOUT FUNCIONAR --- */
+html, body, #map-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif; /* Uma fonte limpa como base */
+}
+
+/* --- A CORREÇÃO PARA O LAYOUT "TORTO" --- */
+/* Posiciona a Árvore de Camadas (TOC) na lateral direita */
+.ms-toc {
+    position: absolute;
+    top: 50px; /* Distância do topo */
+    right: 0;
+    width: 300px; /* Largura do painel */
+    height: calc(100% - 100px); /* Altura do painel */
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #dddddd;
+    box-shadow: -3px 0px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1025; /* Garante que fique acima do mapa */
+}
+
+/* Posiciona a barra de ferramentas principal */
+.map-toolbar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1020;
+}
+
+/* --- AQUI COMEÇA A SUA MÁGICA: CUSTOMIZAÇÃO --- */
+/* Exemplo 1: Mudar a cor de fundo do painel do TOC */
+.ms-toc {
+    background-color: #f8f9fa; /* Um cinza bem claro */
+}
+
+/* Exemplo 2: Mudar a cor dos botões primários (como os de zoom) */
+.btn-primary {
+    background-color: #0056b3; /* Um azul mais escuro */
+    border-color: #004085;
+}
+.btn-primary:hover {
+    background-color: #004085;
+    border-color: #002752;
+}
