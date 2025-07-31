@@ -33,9 +33,9 @@ function init() {
                 "SearchByBookmark",
                 "DrawerMenu",
                 "MetadataExplorer",
-                "MetadataExplorer2",
                 "Locate",
                 "TOC",
+                "UndoPlugin",
                 "StreetView",
                 {
                     "name": "BackgroundSelector",
@@ -55,7 +55,7 @@ function init() {
             ]};
             const configDoMapa = {
                 map: { /* ... sua configuração de mapa ... */ },
-                catalog: { "url": "https://geo.cdhu.sp.gov.br/geoserver/ows?service=WCS&acceptversions=2.0.1&request=GetCapabilities" }
+                MetadataExplorer: { "url": "https://geo.cdhu.sp.gov.br/geoserver/ows?service=WCS&acceptversions=2.0.1&request=GetCapabilities" }
             };
         /*eslint-disable */
         pluginsCfg = cfg && MapStore2.buildPluginsCfg(cfg.pluginsCfg.standard, cfg.userCfg) || embeddedPlugins;
@@ -101,19 +101,6 @@ function init() {
             }
     
         });
-        document.getElementById("zoomToUSA").addEventListener("click", function() {
-            MapStore2.triggerAction({
-              type: 'ZOOM_TO_EXTENT',
-              extent: {
-                minx: '-54.731422',
-                miny: '-24.955967',
-                maxx: '-66.969849',
-                maxy: '-49.371735'
-              },
-              crs: 'EPSG:4326'
-          });
-        });
-        /*eslint-enable */
         
     }
     

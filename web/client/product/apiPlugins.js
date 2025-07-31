@@ -13,11 +13,12 @@ export default {
         MapPlugin: require('../plugins/Map').default,
         ToolbarPlugin: require('../plugins/Toolbar').default,
         DrawerMenuPlugin: require('../plugins/DrawerMenu').default,
+        AddGroup: require('../plugins/AddGroup').default,
 
         // Plugins que você quer adicionar
         SidebarMenu: require('../plugins/SidebarMenu').default,
         TOCPlugin: require('../plugins/TOC').default,
-        SearchPlugin: require('../plugins/Search').default,
+        Search: require('../plugins/Search').default,
         SearchByBookmarkPlugin: require('../plugins/SearchByBookmark').default,
         Measure: require('../plugins/Measure').default,
         BackgroundSelector: require('../plugins/BackgroundSelector').default,
@@ -34,7 +35,8 @@ export default {
 
 
         ZoomAllPlugin: require('../plugins/ZoomAll').default,
-        AddGroup: require('../plugins/AddGroup').default,
+        UndoPlugin: require('../plugins/History'),
+
         
         // O plugin do Catálogo
         MetadataExplorer: require('../plugins/MetadataExplorer').default
@@ -45,3 +47,4 @@ export default {
         SwipeHeader: require('../components/data/identify/SwipeHeader').default
     }
 };
+

@@ -26,16 +26,16 @@
     <style>
         #container {
             position: absolute;
-            top: 100px;
-            bottom: 100px;
-            left: 100px;
-            right: 600px;
+            top: 50px;
+            bottom: 50px;
+            left: 50px;
+            right: 50px;
             overflow: hidden;
         }
         #help {
             position: absolute;
-            top: 100px;
-            bottom: 100px;
+            top: 50px;
+            bottom: 50px;
             width: 500px;
             right: 50px;
             padding: 10px;
@@ -62,12 +62,16 @@
 
     <!-- Carregamos a API do seu ambiente local -->
     <script src="/dist/ms2-api.js"></script> 
-    
+    <script type="text/javascript">
+        function init() {
+            MapStore2.create('container',{
+                configUrl: "http://localhost:8081/rest/geostore/data/15",
+                originalUrl: "http://localhost:8081/#/viewer/15"
+            });
+        }
+    </script>
     <!-- Carregamos o nosso script de inicialização limpo -->
     <script src="init.js"></script>
 
 </body>
 </html>
-
-
-
