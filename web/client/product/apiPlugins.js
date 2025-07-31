@@ -6,26 +6,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+
 export default {
     plugins: {
-        // framework plugins
-        DetailsPlugin: require('../plugins/Details').default,
-        DrawerMenuPlugin: require('../plugins/DrawerMenu').default,
-        FeedbackMaskPlugin: require('../plugins/FeedbackMask').default,
-        GoFullPlugin: require('../plugins/GoFull').default,
-        IdentifyPlugin: require('../plugins/Identify').default,
-        LocatePlugin: require('../plugins/Locate').default,
-        MapFooterPlugin: require('../plugins/MapFooter').default,
-        MapLoadingPlugin: require('../plugins/MapLoading').default,
+        // Plugins essenciais
         MapPlugin: require('../plugins/Map').default,
-        OmniBarPlugin: require('../plugins/OmniBar').default,
-        SearchPlugin: require('../plugins/Search').default,
-        TOCPlugin: require('../plugins/TOC').default,
         ToolbarPlugin: require('../plugins/Toolbar').default,
-        ZoomAllPlugin: require('../plugins/ZoomAll').default,
+        DrawerMenuPlugin: require('../plugins/DrawerMenu').default,
+
+        // Plugins que você quer adicionar
+        SidebarMenu: require('../plugins/SidebarMenu').default,
+        TOCPlugin: require('../plugins/TOC').default,
+        SearchPlugin: require('../plugins/Search').default,
+        SearchByBookmarkPlugin: require('../plugins/SearchByBookmark').default,
+        Measure: require('../plugins/Measure').default,
+        BackgroundSelector: require('../plugins/BackgroundSelector').default,
+        SettingsPlugin: require('../plugins/Settings').default,
+        IdentifyPlugin: require('../plugins/Identify').default,
+        Locate: require('../plugins/Locate').default,
         FullScreenPlugin: require('../plugins/FullScreen').default,
+        ZoomInPlugin: require('../plugins/ZoomIn').default,
+        ZoomOutPlugin: require('../plugins/ZoomOut').default,
         MousePosition: require('../plugins/MousePosition').default,
-        GlobeViewSwitcherPlugin: require('../plugins/GlobeViewSwitcher').default
+        MapFooter: require('../plugins/MapFooter'),
+        StreetView: require( '../plugins/StreetView').default,
+
+
+
+        ZoomAllPlugin: require('../plugins/ZoomAll').default,
+        AddGroup: require('../plugins/AddGroup').default,
+        
+        // O plugin do Catálogo
+        MetadataExplorer: require('../plugins/MetadataExplorer').default
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,

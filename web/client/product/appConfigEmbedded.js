@@ -26,7 +26,7 @@ export default {
     initialState: {
         defaultState: {
             mode: "embedded",
-            mousePosition: {enabled: false},
+            mousePosition: {enabled: true},
             controls: {
                 help: {
                     enabled: false

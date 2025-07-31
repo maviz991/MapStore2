@@ -11,6 +11,7 @@ const config = require('./buildConfig')(
             [process.env.bundle || "mapstore2"]: path.join(__dirname, "..", "web", "client", "product", process.env.entrypoint || process.env.bundle || "app"),
             "embedded": path.join(__dirname, "..", "web", "client", "product", "embedded"),
             "ms2-api": path.join(__dirname, "..", "web", "client", "product", "api"),
+            "custom_embed": path.join(__dirname, "..", "web", "client", "product", "custom_embed.jsx"),
             "dashboard-embedded": path.join(__dirname, "..", "web", "client", "product", "dashboardEmbedded"),
             "geostory-embedded": path.join(__dirname, "..", "web", "client", "product", "geostoryEmbedded")
         },

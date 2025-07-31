@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    build:
-      context: ./docker/postgres/
-    image: geosolutions-mapstore/postgis
+    image: kartoza/postgis:14-3.3 # Usando uma imagem pública e confiável
     container_name: postgres
     restart: on-failure
     healthcheck:
@@ -19,7 +17,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432" # <-- Corrigido para mapeamento
+      - "5433:5432"
     networks:
       - mapstore-network
 
@@ -40,7 +38,10 @@ services:
   mapstore:
     build:
       context: .
-      dockerfile: docker/mapstore/Dockerfile # <-- Corrigido para o caminho padrão
+      dockerfile: Dockerfile # <-- Corrigido para o caminho padrão
+      args:
+        OVR: "geostore-datasource-ovr.properties"
+        MAPSTORE_WEBAPP_SRC: "https://github.com/geosolutions-it/MapStore2/releases/latest/download/mapstore.war"
     container_name: mapstore
     restart: on-failure # <-- Adicionado para consistência
     depends_on:
