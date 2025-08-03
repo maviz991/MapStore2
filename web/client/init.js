@@ -16,27 +16,14 @@ function init() {
         embeddedPlugins = {
             "desktop": [
                 "Map",
+                "Toolbar",
                 "SidebarMenu",
                 "Measure",
-                "AddGroup",
-                "MousePosition",
-                "DrawerMenuPlugin",
-                "MapFooter",
-                "Toolbar",
-                "ZoomAll",
-                "Expander",
-                "ZoomIn",
-                "ZoomOut",
-                "ScaleBox",
-                "OmniBar",
-                "Search",
-                "SearchByBookmark",
-                "DrawerMenu",
-                "MetadataExplorer",
-                "Locate",
                 "TOC",
-                "UndoPlugin",
-                "StreetView",
+                "DrawerMenu",
+                "AddGroup",
+                { "name": "Footer" },
+
                 {
                     "name": "BackgroundSelector",
                     "cfg": {
@@ -45,13 +32,33 @@ function init() {
                             "sidePreview": 65,
                             "frame": 3,
                             "margin": 5,
-                            "label": true,
-                            "vertical": false
+                            "label": false,
+                            "vertical": true
                         }
                     }
                 },
                 "Identify",
-                "FullScreen"
+                "Locate",
+                "FullScreen",
+                "ZoomIn",
+                "ZoomOut",
+                "StreetView",
+                "ZoomAll",
+                "MetadataExplorer",
+                "DrawerMenuPlugin",
+                "Search",
+
+
+                // Plugins que não estão funcionando
+                //"OmniBar", //(causando problema em search)
+                "CRSSelector",
+                //"Expander",
+                "ScaleBox",
+                "SettingsPlugin",
+                "MousePosition",
+                "Footer",
+                "CRSSelector",
+                "UndoPlugin",
             ]};
             const configDoMapa = {
                 map: { /* ... sua configuração de mapa ... */ },
@@ -102,5 +109,7 @@ function init() {
     
         });
         
+            /*eslint-enable */
+
     }
     

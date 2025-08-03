@@ -31,9 +31,9 @@ const customConfig = {
 const customPluginsDefinition = {
     ...pluginsDefinition,
     desktop: [
-        "MapPlugin", "DrawerMenuPlugin", "IdentifyPlugin", "ZoomInPlugin", "ZoomOutPlugin",
-        "ZoomAllPlugin", "BackgroundSelectorPlugin", "MeasurePlugin", "TOCPlugin",
-        "SettingsPlugin", "MetadataExplorerPlugin", "FullScreenPlugin", "ToolbarPlugin"
+        "Map", "DrawerMenu", "Identify", "ZoomIn", "ZoomOut",
+        "ZoomAllPlugin", "BackgroundSelector", "Measure", "TOCPlugin",
+        "Settings", "MetadataExplorer", "FullScreen", "Toolbar"
     ]
 };
 

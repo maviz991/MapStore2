@@ -12,6 +12,7 @@ import maplayout from '../reducers/maplayout';
 import searchconfig from '../reducers/searchconfig';
 import version from '../reducers/version';
 
+
 export default {
     mode: "embedded",
     pages: [{
@@ -32,14 +33,14 @@ export default {
                     enabled: false
                 },
                 print: {
-                    enabled: false
+                    enabled: true
                 },
                 toolbar: {
-                    active: null,
-                    expanded: false
+                    active: true,
+                    expanded: true
                 },
                 drawer: {
-                    enabled: false,
+                    enabled: true,
                     menu: "1"
                 }
             },

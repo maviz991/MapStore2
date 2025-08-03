@@ -9,37 +9,35 @@
 
 export default {
     plugins: {
-        // Plugins essenciais
-        MapPlugin: require('../plugins/Map').default,
-        ToolbarPlugin: require('../plugins/Toolbar').default,
-        DrawerMenuPlugin: require('../plugins/DrawerMenu').default,
-        AddGroup: require('../plugins/AddGroup').default,
-
-        // Plugins que você quer adicionar
-        SidebarMenu: require('../plugins/SidebarMenu').default,
-        TOCPlugin: require('../plugins/TOC').default,
-        Search: require('../plugins/Search').default,
-        SearchByBookmarkPlugin: require('../plugins/SearchByBookmark').default,
-        Measure: require('../plugins/Measure').default,
-        BackgroundSelector: require('../plugins/BackgroundSelector').default,
-        SettingsPlugin: require('../plugins/Settings').default,
-        IdentifyPlugin: require('../plugins/Identify').default,
-        Locate: require('../plugins/Locate').default,
-        FullScreenPlugin: require('../plugins/FullScreen').default,
-        ZoomInPlugin: require('../plugins/ZoomIn').default,
-        ZoomOutPlugin: require('../plugins/ZoomOut').default,
-        MousePosition: require('../plugins/MousePosition').default,
-        MapFooter: require('../plugins/MapFooter'),
+        // Plugins funcionando
+        Map: require('../plugins/Map').default, //mapa
+        Toolbar: require('../plugins/Toolbar').default, //barra de ferramentas (lateral interna) (mover posição)
+        SidebarMenu: require('../plugins/SidebarMenu').default, //barra lateral (nesseária para aparecr alguns puglins)
+        Measure: require('../plugins/Measure').default, //Régua - depende de SidebarMenu
+        TOC: require('../plugins/TOC').default, //árvore de elementos (camadas)
+        //LongitudinalPT: require('../plugins/LongitudinalProfileTool'),
+        DrawerMenu: require('../plugins/DrawerMenu').default, //necessário para o TOC
+        AddGroup: require('../plugins/AddGroup').default, //add grupos de camadas no TOC
+        BackgroundSelector: require('../plugins/BackgroundSelector').default, //seletor de fundo
+        Identify: require('../plugins/Identify').default, //identificador de dados de feições
+        Locate: require('../plugins/Locate').default, //exibe localização atual do usuário
+        FullScreen: require('../plugins/FullScreen').default, //permite tela cheia
+        ZoomIn: require('../plugins/ZoomIn').default,
+        ZoomOut: require('../plugins/ZoomOut').default,
         StreetView: require( '../plugins/StreetView').default,
+        ZoomAll: require('../plugins/ZoomAll').default,
+        MetadataExplorer: require('../plugins/MetadataExplorer').default, //busca de catálogos
+        Expander: require( '../plugins/Expander').default,
 
+        // Plugins que não estão funcionando
+        Search: require('../plugins/Search').default, //busca do osm não funciona
+        OmniBar: require( '../plugins/OmniBar').default, //causando problema
+        SettingsPlugin: require('../plugins/Settings').default, //Config de exibição
+        MousePosition: require('../plugins/MousePosition').default, //coordenada de onde o mouse estar
+        Footer: require('../plugins/MapFooter').default, //barra inferior
+        //CRSSelector: require('../plugins/CRSSelector').default,//seleciona o datum
+        UndoPlugin: require('../plugins/History').default//desfaz ação
 
-
-        ZoomAllPlugin: require('../plugins/ZoomAll').default,
-        UndoPlugin: require('../plugins/History'),
-
-        
-        // O plugin do Catálogo
-        MetadataExplorer: require('../plugins/MetadataExplorer').default
     },
     requires: {
         ReactSwipe: require('react-swipeable-views').default,

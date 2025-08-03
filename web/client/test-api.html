@@ -36,10 +36,10 @@
             position: absolute;
             top: 50px;
             bottom: 50px;
-            width: 500px;
-            right: 50px;
+            width: 250px;
+            right: 0px;
             padding: 10px;
-            border: solid 1px black;
+            border:0;
         }
         #map {
             position:absolute;
@@ -62,16 +62,10 @@
 
     <!-- Carregamos a API do seu ambiente local -->
     <script src="/dist/ms2-api.js"></script> 
-    <script type="text/javascript">
-        function init() {
-            MapStore2.create('container',{
-                configUrl: "http://localhost:8081/rest/geostore/data/15",
-                originalUrl: "http://localhost:8081/#/viewer/15"
-            });
-        }
-    </script>
+
     <!-- Carregamos o nosso script de inicialização limpo -->
     <script src="init.js"></script>
+
 
 </body>
 </html>
