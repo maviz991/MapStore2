@@ -10,12 +10,15 @@
 export default {
     plugins: {
         // Plugins funcionando
+        BurgerMenu: require('../plugins/BurgerMenu'),
+        Cookie: require('../plugins/Cookie'),
         Map: require('../plugins/Map').default, //mapa
+        MapLoading: require('../plugins/MapLoading'),
         Toolbar: require('../plugins/Toolbar').default, //barra de ferramentas (lateral interna) (mover posição)
         SidebarMenu: require('../plugins/SidebarMenu').default, //barra lateral (nesseária para aparecr alguns puglins)
         Measure: require('../plugins/Measure').default, //Régua - depende de SidebarMenu
         TOC: require('../plugins/TOC').default, //árvore de elementos (camadas)
-        //LongitudinalPT: require('../plugins/LongitudinalProfileTool'),
+        LongitudinalProfileTool: require('../plugins/LongitudinalProfileTool'),
         DrawerMenu: require('../plugins/DrawerMenu').default, //necessário para o TOC
         AddGroup: require('../plugins/AddGroup').default, //add grupos de camadas no TOC
         BackgroundSelector: require('../plugins/BackgroundSelector').default, //seletor de fundo
@@ -28,15 +31,14 @@ export default {
         ZoomAll: require('../plugins/ZoomAll').default,
         MetadataExplorer: require('../plugins/MetadataExplorer').default, //busca de catálogos
         Expander: require( '../plugins/Expander').default,
-
-        // Plugins que não estão funcionando
+        GoFull: require('../plugins/GoFull'),
         Search: require('../plugins/Search').default, //busca do osm não funciona
         OmniBar: require( '../plugins/OmniBar').default, //causando problema
         SettingsPlugin: require('../plugins/Settings').default, //Config de exibição
         MousePosition: require('../plugins/MousePosition').default, //coordenada de onde o mouse estar
         Footer: require('../plugins/MapFooter').default, //barra inferior
-        //CRSSelector: require('../plugins/CRSSelector').default,//seleciona o datum
-        UndoPlugin: require('../plugins/History').default//desfaz ação
+        CRSSelector: require('../plugins/CRSSelector').default,//seleciona o datum
+        History: require('../plugins/History').default//desfaz ação
 
     },
     requires: {

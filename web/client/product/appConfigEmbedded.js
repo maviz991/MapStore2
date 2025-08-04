@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
 */
 
+import { enable } from 'babel-standalone';
 import {updateActiveDockEpic, updateMapLayoutEpic} from '../epics/maplayout';
 import {readQueryParamsOnMapEpic} from '../epics/queryparams';
 import maplayout from '../reducers/maplayout';
 import searchconfig from '../reducers/searchconfig';
 import version from '../reducers/version';
-
+import BurgerMenu from '../plugins/BurgerMenu.jsx';
 
 export default {
     mode: "embedded",
@@ -33,15 +34,21 @@ export default {
                     enabled: false
                 },
                 print: {
-                    enabled: true
+                    enabled: false
                 },
                 toolbar: {
-                    active: true,
-                    expanded: true
+                    active: null,
+                    expanded: false
                 },
                 drawer: {
-                    enabled: true,
+                    enabled: false,
                     menu: "1"
+                },
+                onmnibar: {
+                    enable: true
+                },
+                burgermenu: {
+                    enable: true
                 }
             },
             mapInfo: {enabled: true, infoFormat: 'text/html' }
