@@ -10,8 +10,8 @@
 export default {
     plugins: {
         // Plugins funcionando
-        BurgerMenu: require('../plugins/BurgerMenu'),
-        Cookie: require('../plugins/Cookie'),
+        BurgerMenu: require('../plugins/BurgerMenu').default,
+        Cookie: require('../plugins/Cookie').default,
         Map: require('../plugins/Map').default, //mapa
         MapLoading: require('../plugins/MapLoading'),
         Toolbar: require('../plugins/Toolbar').default, //barra de ferramentas (lateral interna) (mover posição)
@@ -38,7 +38,8 @@ export default {
         MousePosition: require('../plugins/MousePosition').default, //coordenada de onde o mouse estar
         Footer: require('../plugins/MapFooter').default, //barra inferior
         CRSSelector: require('../plugins/CRSSelector').default,//seleciona o datum
-        History: require('../plugins/History').default//desfaz ação
+        History: require('../plugins/History').default,//desfaz ação,
+        StyleEditor: require('../plugins/StyleEditor').default
 
     },
     requires: {

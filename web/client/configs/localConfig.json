@@ -675,7 +675,7 @@
             "openlayers": {
               "interactions": {
                 "pinchRotate": false,
-                "altShiftDragRotate": false
+                "altShiftDragRotate": true
               },
               "attribution": {
                 "container": "#footer-attribution-container"
@@ -701,7 +701,46 @@
           }
         }
       },
-      { "name": "LongitudinalProfileTool" },
+      "MapFooter",
+      "StyleEditor",
+      {
+        "name": "Measure",
+        "cfg": {
+          "defaultOptions": {
+            "showAddAsAnnotation": true
+          }
+        }
+      },
+      "Print",
+      {
+        "name": "MousePosition",
+        "cfg": {
+          "editCRS": true,
+          "showLabels": true,
+          "showToggle": true,
+          "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
+          "additionalCRS": {}
+        }
+      },
+      {
+        "name": "LongitudinalProfileTool",
+        "showIn": ["BurgerMenu"], 
+        "cfg": {                 
+            "wpsurl": "http://localhost:8282/geoserver/wps",
+            "chartTitle": "Perfil Longitudinal",
+            "defaultDistance": 75,
+            "noDataThreshold": 999999,
+            "defaultReferentialName": "sfdem",
+            "referentials": [{
+                "layerName": "sfdem",
+                "title": "Modelo de Elevação (sfdem)"
+            }],
+            "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
+            "additionalCRS": {
+              "EPSG:3003": { "label": "EPSG:3003" }
+            }
+        }
+      },
       {
         "name": "Toolbar",
         "id": "NavigationBar",
@@ -709,7 +748,6 @@
           "id": "navigationBar"
         }
       },
-      { "name": "OmniBar" },
       {
         "name": "MapLoading",
         "override": {
@@ -718,7 +756,6 @@
           }
         }
       },
-      { "name": "Cookie" },
       { "name": "TOC" },
       { "name": "ZoomIn" ,
         "override": {
@@ -734,31 +771,16 @@
           }
         }
       },
-      { "name": "Measure" },
       {
         "name": "Settings",
         "cfg": {
           "wrap": true
         }
       },
-      {
-        "name": "BurgerMenu",
-        "override": {
-          "Toolbar": {
-            "position": 10
-          }
-        },
-        "cfg": {
-          "tools": ["MetadataExplorer", "StreetView", "Settings", "Measure"]
-        }
-      },
-      {
-        "name": "Search",
-        "cfg": {
-          "showOptions": true,
-          "withToggle": true
-        }
-      },
+      "OmniBar",
+      "BurgerMenu",
+      "Search",
+
       {
         "name": "Identify",
         "cfg": {
@@ -777,6 +799,13 @@
         }
       },
       { "name": "FullScreen" },
+      {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl": "",
+          "declineUrl": "http://www.google.com"
+        }
+      },
       {
         "name": "BackgroundSelector",
         "cfg": {
@@ -803,14 +832,28 @@
       },
       { "name": "StreetView" },
       { "name": "MetadataExplorer"},
-      { "name": "Expander" },
-      { "name": "History" },
+      { "name": "Expander" ,
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      }
+    },
+      "Undo",
+      "Redo",
       {
         "name": "GoFull",
         "override": {
           "Toolbar": {
             "alwaysVisible": true
           }
+        }
+      },
+      {
+        "name": "CRSSelector",
+        "cfg": {
+          "additionalCRS": {},
+          "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"]
         }
       },
       { "name":  "FeedbackMask" }
