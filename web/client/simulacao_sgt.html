@@ -26,7 +26,7 @@
                 background-color: rgba(255, 255, 255, 0.9);
                 border: 1px solid #ccc;
                 border-radius: 5px;
-                z-index: 1000; /* Garante que fique acima do mapa */
+                z-index: 1000; 
                 font-family: 'Noto Sans', sans-serif;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             }
@@ -54,29 +54,23 @@
     </head>
     <body onload="init()">
 
-        <!-- ======================================================= -->
+
         <!--     SIMULADOR DO SGT - AQUI É ONDE VOCÊ VAI TESTAR      -->
-        <!-- ======================================================= -->
         <div id="sgt-simulator">
             <label for="terrenoIdInput">ID do Município (CD_MUN):</label>
             <input type="text" id="terrenoIdInput" placeholder="Ex: 3550308">
             <button onclick="simularBuscaDoSGT()">Buscar no Mapa</button>
         </div>
-        <!-- ======================================================= -->
 
         <div id="container" class="ms2"></div>
 
-        <!-- Carrega a API compilada do MapStore -->
+        <!-- Carrega a API do MapStore -->
         <script id="ms2-api" src="/dist/ms2-api.js"></script>
         
-        <!-- Carrega seu script customizado para a busca -->
+        <!-- Carrega seu script para a busca -->
         <script src="callterreno.js"></script>
 
         <script type="text/javascript">
-            /**
-             * Inicializa a aplicação MapStore.
-             * Usa caminhos relativos para funcionar com o proxy NGINX na porta 8080.
-             */
             function init() {
                 MapStore2.create('container', {
                     configUrl: "http://localhost:8081/rest/geostore/data/15",
