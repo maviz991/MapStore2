@@ -28,6 +28,7 @@ export default {
         ZoomIn: require('../plugins/ZoomIn').default,
         ZoomOut: require('../plugins/ZoomOut').default,
         StreetView: require( '../plugins/StreetView').default,
+        QueryPanel: require('../plugins/QueryPanel').default,
         ZoomAll: require('../plugins/ZoomAll').default,
         MetadataExplorer: require('../plugins/MetadataExplorer').default, //busca de catálogos
         Expander: require( '../plugins/Expander').default,
