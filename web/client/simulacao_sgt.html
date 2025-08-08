@@ -1,91 +1,122 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Simulação SGT - API MapStore</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulação SGT</title>
+    
+    <!-- Dependências do MapStore -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+
+    <style>
+        /* Estilos básicos para o formulário de teste */
+        #sgt-simulator {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            color: aliceblue;
+            background-color: #2e2b2b;
+            border: 1px solid #000000;
+            z-index: 1000; 
+            font-family: 'Noto Sans', sans-serif;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        #sgt-simulator input {
+            margin-right: 5px;
+            padding: 4px;
+        }
+        #sgt-simulator button {
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        /* Estilo para o container do mapa */
+        #container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #mapstore2-embedded, #map, .fill {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body onload="onPageLoad()">
+
+    <!-- O formulário de busca foi removido -->
+
+    <div id="container" class="ms2"></div>
+
+    <!-- Carrega a API do MapStore -->
+    <script id="ms2-api" src="/dist/ms2-api.js"></script>
+    
+    <!-- Carrega seu script para a busca -->
+    <script src="callterreno.js"></script>
+
+    <script type="text/javascript">
+        /**
+         * Função principal que é executada quando a página termina de carregar.
+         */
+        function onPageLoad() {
+            // 1. Inicializa o mapa do MapStore
+            init();
+
+            // 2. Tenta executar a busca com base nos parâmetros da URL
+            executeSearchFromUrl();
+        }
+
+        /**
+         * Inicializa o componente do mapa.
+         */
+        function init() {
+            MapStore2.create('container', {
+                configUrl: "http://localhost:8081/rest/geostore/data/15",
+                originalUrl: "http://localhost:8081/#/viewer/15"
+            });
+        }
         
-        <!-- Dependências do MapStore -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
-        <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+        /**
+         * Lê os parâmetros da URL e, se forem válidos, inicia a busca no mapa.
+         */
+        function executeSearchFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const executar = params.get('executar');
+            const id = params.get('id');
 
-        <style>
-            /* Estilos básicos para o formulário de teste */
-            #sgt-simulator {
-                position: absolute;
-                top: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                padding: 10px;
-                background-color: rgba(255, 255, 255, 0.9);
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                z-index: 1000; 
-                font-family: 'Noto Sans', sans-serif;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            // Verifica se os parâmetros 'executar=1' e 'id' existem na URL
+            if (executar === '1' && id) {
+                console.log(`ID ${id} recebido via URL. Executando busca automática.`);
+                
+                // Usamos um pequeno timeout para garantir que a API do mapa esteja pronta
+                setTimeout(function() {
+                    if (typeof buscarTerrenoNoMapa === 'function') {
+                        buscarTerrenoNoMapa(id);
+                    } else {
+                        console.error("A função 'buscarTerrenoNoMapa' não foi encontrada. Verifique se o script 'callterreno.js' foi carregado corretamente.");
+                        alert("Erro: A função de busca não está disponível.");
+                    }
+                }, 500); // 500ms de espera, ajuste se necessário
+
+            } else {
+                // Caso a página seja aberta sem os parâmetros corretos
+                console.warn("Nenhum parâmetro de busca encontrado na URL. O mapa será exibido sem nenhuma busca.");
+                // Opcional: Mostrar uma mensagem para o usuário
+                alert("Nenhum ID de busca foi fornecido. O mapa será carregado sem dados.");
             }
-            #sgt-simulator input {
-                margin-right: 5px;
-                padding: 4px;
-            }
-            #sgt-simulator button {
-                padding: 4px 8px;
-            }
-
-            /* Estilo para o container do mapa */
-            #container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-            #mapstore2-embedded, #map, .fill {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
-    </head>
-    <body onload="init()">
-
-
-        <!--     SIMULADOR DO SGT - AQUI É ONDE VOCÊ VAI TESTAR      -->
-        <div id="sgt-simulator">
-            <label for="terrenoIdInput">ID do Município (CD_MUN):</label>
-            <input type="text" id="terrenoIdInput" placeholder="Ex: 3550308">
-            <button onclick="simularBuscaDoSGT()">Buscar no Mapa</button>
-        </div>
-
-        <div id="container" class="ms2"></div>
-
-        <!-- Carrega a API do MapStore -->
-        <script id="ms2-api" src="/dist/ms2-api.js"></script>
-        
-        <!-- Carrega seu script para a busca -->
-        <script src="callterreno.js"></script>
-
-        <script type="text/javascript">
-            function init() {
-                MapStore2.create('container', {
-                    configUrl: "http://localhost:8081/rest/geostore/data/15",
-                    originalUrl: "http://localhost:8081/#/viewer/15"
-                });
-            }
-
-            /**
-             * Função "ponte" que é chamada pelo clique do botão no HTML.
-             * Ela pega o valor do input e chama a função principal do seu script externo.
-             */
-            function simularBuscaDoSGT() {
-                const id = document.getElementById('terrenoIdInput').value;
-                buscarTerrenoNoMapa(id);
-            }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home SGT</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #sgt-simulator {
+            padding: 20px 30px;
+            color: aliceblue;
+            background-color: #2e2b2b;
+            border: 1px solid #000000;
+            z-index: 1000; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            text-align: center;
+        }
+        #sgt-simulator label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #sgt-simulator input {
+            margin-right: 5px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #555;
+        }
+        #sgt-simulator button {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: none;
+            background-color: #e24a4a;
+            color: white;
+            cursor: pointer;
+        }
+        #sgt-simulator button:hover {
+            background-color: #bd3535;
+        }
+    </style>
+</head>
+<body>
+    <div id="sgt-simulator">
+        <label for="terrenoIdInput">ID do Terreno (IDTERRENO | ex: 3550308069132600000):</label>
+        <input type="text" id="terrenoIdInput" placeholder="Ex: 3550308069132600000">
+        <button onclick="abrirNovaPagina()">Buscar no Mapa</button>
+    </div>
+    <script>src="/callterrenos.js"</script>
+    <script>
+        function abrirNovaPagina() {
+            const id = document.getElementById('terrenoIdInput').value;
+            if (!id) {
+                alert('Por favor, insira um ID do Terreno.');
+                return;
+            }
+            // O nome do arquivo deve ser exatamente "simulacao_sgt.html"
+            const url = `simulacao_sgt.html?executar=1&id=${encodeURIComponent(id)}`;
+            window.open(url, '_blank');
+        }
+
+        /*/ Permite o uso da tecla Enter para buscar
+        document.getElementById('terrenoIdInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                abrirNovaPagina();
+            }
+        });*/
+    </script>
+
+</body>
+</html>

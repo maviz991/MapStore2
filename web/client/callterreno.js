@@ -7,8 +7,8 @@ function buscarTerrenoNoMapa(idTerreno) {
     console.log("Buscando terreno com ID:", idTerreno);
 
     const workspace = "teste_docker";
-    const layerName = "SP_Municipios_2023.shp";
-    const idField = "CD_MUN";
+    const layerName = "vwgeoutm23s";
+    const idField = "IDTERRENO_Vetor";
 
     const wfsUrl = `http://localhost:8282/geoserver/${workspace}/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${workspace}:${layerName}&outputFormat=application/json&CQL_FILTER=${idField}=${idTerreno}`;
 
@@ -40,7 +40,7 @@ function buscarTerrenoNoMapa(idTerreno) {
                 layer: {
                     id: vectorLayerId,
                     name: "Terreno buscado",
-                    title: "Terreno buscado",
+                    title: ("Terreno: " + idTerreno),
                     type: "vector",
                     visibility: true,
                     hideLoading: true,
@@ -50,7 +50,7 @@ function buscarTerrenoNoMapa(idTerreno) {
                         weight: 3,
                         opacity: 1,
                         fillColor: "#FFAAAA",
-                        fillOpacity: 0.4
+                        fillOpacity: 0.1
                     }
                 }
             });
@@ -60,8 +60,10 @@ function buscarTerrenoNoMapa(idTerreno) {
             MapStore2.triggerAction({
                 type: 'ZOOM_TO_EXTENT',
                 extent: bbox,
-                crs: "EPSG:4326" // ajuste se estiver usando outro CRS
+                zoom: '5',
+                crs: "EPSG:4326" // a camada precisa estar com crs geográfica - UTM não funciona
             });
+
 
         })
         .catch(error => {
